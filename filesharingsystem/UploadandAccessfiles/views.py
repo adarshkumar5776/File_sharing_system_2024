@@ -95,7 +95,6 @@ def user_registration(request):
     verification_token = get_random_string(length=32)
     user = User.objects.create_user(username=username, password=password, email=email, is_active=False)
 
-    # Create UserProfile instance and associate it with the user
     profile = UserProfile.objects.create(user=user, verification_token=verification_token)
 
     verification_link = f"{settings.BASE_URL}/api/verify-email/{verification_token}/"
@@ -124,7 +123,7 @@ def verify_email(request, verification_token):
     user_profile.user.is_active = True
     user_profile.user.save()
 
-    # You might want to clear the verification token after successful verification
+    #clear the verification token after successful verification
     user_profile.verification_token = ""
     user_profile.save()
 
