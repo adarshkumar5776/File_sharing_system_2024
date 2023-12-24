@@ -1,0 +1,5 @@
+SELECT json_extract(props, '$.platform') AS platform FROM experiments WHERE experiment_id = '0003b4c8432017e8756b2324965b825f7c014327';
+
+SELECT *
+FROM experiments
+WHERE JSON_SERIALIZE(props) LIKE '%local%';
