@@ -61,7 +61,7 @@ ROOT_URLCONF = "filesharingsystem.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR,'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -152,3 +152,6 @@ EMAIL_HOST_USER = 'your_gmail_id'
 EMAIL_HOST_PASSWORD = 'password'
 
 BASE_URL = 'http://localhost:8000'
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Or any other backend you are using
+SESSION_COOKIE_SECURE = True  # If using HTTPS; set to False for development without HTTPS

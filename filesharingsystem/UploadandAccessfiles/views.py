@@ -20,6 +20,7 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from .models import UserProfile
 from django.contrib.auth import get_user_model
+from django.shortcuts import render
 
 User = get_user_model()
 
@@ -130,32 +131,30 @@ def verify_email(request, verification_token):
     return JsonResponse({"message": "Email verification successful"})
 
 
-@api_view(["POST"])
-@permission_classes([AllowAny])
+# @api_view(["POST"])
+# @permission_classes([AllowAny])
 def user_login(request):
     """
     API endpoint that allows user login and returns a token upon successful authentication.
     Returns a JSON response with the token or an error message for invalid credentials.
     """
-    username = request.data.get("username")
-    password = request.data.get("password")
-    user = authenticate(request, username=username, password=password)
-    if user:
-        login(request, user)
-        token, created = Token.objects.get_or_create(user=user)
-        return JsonResponse({"token": token.key})
-    else:
-        return JsonResponse({"error": "Invalid credentials"}, status=400)
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        print(username)
+        print(password)
+        user = authenticate(request, username=username, password=password)
+        if user:
+            login(request, user)
+            return render(request,'Home.html')
+        else:
+            return JsonResponse({"error": "Invalid credentials"}, status=400)
+    return render(request,'Login.html')
 
 
-@api_view(["POST"])
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
 def user_logout(request):
     """
-    API endpoint that allows user logout and deletes the authentication token.
-    Requires token-based authentication.
+    Logout the user and render the login page.
     """
     logout(request)
-    request.auth.delete()
-    return JsonResponse({"message": "Logout successful"})
+    return render(request, 'Login.html')

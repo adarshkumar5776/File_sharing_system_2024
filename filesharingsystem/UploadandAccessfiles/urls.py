@@ -12,7 +12,7 @@ urlpatterns = [
     path('api/all_files/', views.all_files, name='all_files'),
     path('api/download/<int:pk>/', views.download_file, name='download_file'),
     path('api/user/register/', views.user_registration, name='user_registration'),
-    path('api/user/login/', views.user_login, name='user_login'),
-    path('api/user/logout/', views.user_logout, name='user_logout'),
+    path('login', views.user_login, name='user_login'),
+    path('logout', views.user_logout, name='user_logout'),
     path('api/verify-email/<str:verification_token>/', views.verify_email, name='verify_email'),
 ]
