@@ -88,12 +88,13 @@ WSGI_APPLICATION = "filesharingsystem.wsgi.application"
 # }
 
 DATABASES = {
-'default': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'EZ_DB',
+        'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD':'1234',
-        'HOST':'localhost' 
+        'PASSWORD': 'dDFDab2AE3fF4CA231c-GF3bebcggEaE',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT': '15989',
     }
 }
 
