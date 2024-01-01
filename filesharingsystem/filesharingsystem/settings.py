@@ -55,7 +55,12 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+CSRF_COOKIE_SECURE = True 
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://gmail-autoresponder.up.railway.app',
+    # ... any other trusted origins
+]
 ROOT_URLCONF = "filesharingsystem.urls"
 
 TEMPLATES = [
